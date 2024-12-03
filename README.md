@@ -1,10 +1,9 @@
-# docker-quetre-quay
+# docker-quetre
 
-A [Quetre](https://github.com/zyachel/quetre) image, on Quay.
+`docker pull ghcr.io/shindouj/quetre:latest`
 
-[Quay page](https://quay.io/repository/pussthecatorg/quetre) | [GitHub page](https://github.com/PussTheCat-org/docker-quetre-quay)
-
-This image mostly exist for the [PussTheCat.org](https://pussthecat.org/) [instance](https://quetre.pussthecat.org/), but others are free to use it.
+A [Quetre](https://github.com/zyachel/quetre) image, forked from [PussTheCat](https://github.com/PussTheCat-org/docker-quetre-quay).
+Used for the [jeikobu.net](https://quetre.jeikobu.net) instance. The main difference is creating images only when an actual change in code has occured.
 
 ## Usage:
 

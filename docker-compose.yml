@@ -1,8 +1,7 @@
 services:
-
   quetre:
     container_name: quetre
-    image: quay.io/pussthecatorg/quetre:latest
+    image: ghcr.io/shindouj/quetre:latest
     restart: unless-stopped
     ports:
       - "127.0.0.1:3000:3000" # Replace with "3000:3000" if you don't use a reverse proxy
@@ -12,8 +11,34 @@ services:
       - "CACHE_PERIOD=1h"
       - "REDIS_URL=quetre-redis:6379"
       - "REDIS_TTL=3600"
-
+    user: nobody
+    read_only: true
+    tmpfs:
+      - /app/.next/cache/:size=10M,mode=0770,uid=65534,gid=65534,noexec,nosuid,nodev
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    networks:
+      - quetre
+    healthcheck:
+      test: wget -nv --tries=1 --spider http://127.0.0.1:3000 || exit 1
+      interval: 1m
+      timeout: 3s
+    depends_on:
+      quetre-redis:
+        condition: service_healthy
+        restart: true
   quetre-redis:
-    container_name: quetre-redis
+    container_name: chernobyl-quetre-redis
     image: docker.io/redis:alpine
     restart: unless-stopped
+    healthcheck:
+      test: redis-cli ping
+      interval: 30s
+      timeout: 5s
+      retries: 2
+    networks:
+      - quetre
+networks:
+  quetre:
