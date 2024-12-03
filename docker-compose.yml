@@ -26,7 +26,7 @@ services:
         condition: service_healthy
         restart: true
   quetre-redis:
-    container_name: chernobyl-quetre-redis
+    container_name: quetre-redis
     image: docker.io/redis:alpine
     restart: unless-stopped
     healthcheck:
