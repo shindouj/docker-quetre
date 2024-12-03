@@ -11,7 +11,6 @@ services:
       - "CACHE_PERIOD=1h"
       - "REDIS_URL=quetre-redis:6379"
       - "REDIS_TTL=3600"
-    user: nobody
     security_opt:
       - no-new-privileges:true
     cap_drop:
